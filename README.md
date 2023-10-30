@@ -62,8 +62,8 @@ python secret-santa.py --help
 ## Sources de données supportées
 
 - Fichier au format `json` contenant un dictionnaire avec pour clés :
-    - `"PEOPLE"` (`List[str]`): liste des membres du groupes
-    - `"COUPLES"` (`List[List[str]]`): liste des couples 
+    - `"people"` (`List[str]`): liste des membres du groupes
+    - `"couples"` (`List[List[str]]`): liste des couples 
 
 ## Développement
 
@@ -90,5 +90,13 @@ Lancer la suite de tests:
 ```bash
 pytest
 ```
+
+Pour générer un nouveau jeu de données avec `n_people` et `n_couple`, modifier ces valeurs dans le script `generate-data.py` et lancer:
+
+
+```bash
+python generate-data.py
+```
+
 
 ## Améliorations
