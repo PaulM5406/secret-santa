@@ -1,8 +1,10 @@
 import argparse
 from enum import Enum
 import itertools
+import json
+from pathlib import Path
 import time
-from typing import Sequence, List
+from typing import Sequence, List, Tuple
 
 
 def check_solution(people:Sequence[str], couples: Sequence[Sequence[str]], solution: List[str]) -> bool:
@@ -44,18 +46,23 @@ def brute_force(people: Sequence[str], couples: Sequence[Sequence[str]]) -> List
             return possible_solution
     return []
 
+
 class NotEnoughPeopleError(Exception):
     pass
+
 
 class AlgorithmNotFoundError(Exception):
     pass
 
+
 class Algorithm(Enum):
     BRUTE_FORCE = 1
+
 
 ALGORITHM_MAP = {
     Algorithm.BRUTE_FORCE: brute_force
 }
+
 
 def solve(people: Sequence[str], couples: Sequence[Sequence[str]], algo: Algorithm) -> List[str]:
     """
@@ -68,6 +75,41 @@ def solve(people: Sequence[str], couples: Sequence[Sequence[str]], algo: Algorit
         raise NotEnoughPeopleError
 
     return ALGORITHM_MAP[algo](people, couples)
+
+
+def read_json(pathname: str) -> Tuple[Sequence[str], Sequence[Sequence[str]]]:
+    """
+    Read json file to extract people and couples defined as keys of a dictionary.
+    """ 
+    with open(pathname, 'r') as f:
+        data = json.load(f)
+    if 'people' not in data or 'couples' not in data:
+        raise IncorrectFormatError
+    return data['people'], data['couples']
+
+
+class IncorrectFormatError(Exception):
+    pass
+
+
+class ExtensionNotSupportedError(Exception):
+    pass
+
+
+EXTENSION_MAP = {
+    '.json': read_json
+}
+
+
+def read_data(pathname: Path) -> Tuple[Sequence[str], Sequence[Sequence[str]]]:
+    """
+    Read data depending on the extension of the file.
+    """
+    extension = Path(pathname).suffix
+    if extension not in EXTENSION_MAP:
+        raise ExtensionNotSupportedError
+
+    return EXTENSION_MAP[extension](pathname)
 
 
 def main() -> None:
@@ -87,12 +129,13 @@ def main() -> None:
         description='Find a solution if at least one exists to the secret santa problem'
         )
     parser.add_argument('--runtime', action='store_true', help='Print runtime')
+    parser.add_argument('pathname', type=str, help='Pathname of file that contains problem data. See supported formats in README.md')
     args = parser.parse_args()
 
-    PEOPLE = ["Florent", "Jessica", "Coline", "Emilien", "Ambroise", "Bastien"]
-    COUPLES = [("Florent", "Jessica"), ("Coline", "Emilien")]
+    people, couples = read_data(args.pathname)
+
     start = time.time()
-    print(solve(PEOPLE, COUPLES, Algorithm.BRUTE_FORCE))
+    print(solve(people, couples, Algorithm.BRUTE_FORCE))
     end = time.time()
     if args.runtime:
         print(f'Runtime: {(end - start) * 1e3:.3f}ms')

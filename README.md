@@ -43,11 +43,28 @@ Par exemple, en utilisant le jeux de données d'example (chaque membre est dési
 Avec cette représentation, le problème peut être reformuler comme suit:
 > Trouver le chemin reliant chaque sommet exactement une fois et revenant au sommet de départ.
 
-## Comment lancer secret-santa
+## Comment lancer *secret-santa*
+
+Nécessaire au lancement du programme: `python >= 3.4` 
+
+Pour lancer *secret-santa*:
 
 ```bash
-python secret-santa.py
+python secret-santa.py data-test.json
 ```
+
+Accéder aux différentes options:
+
+```bash
+python secret-santa.py --help
+```
+
+## Sources de données supportées
+
+- Fichier au format `json` contenant un dictionnaire avec pour clés :
+    - `"PEOPLE"` (`List[str]`): liste des membres du groupes
+    - `"COUPLES"` (`List[List[str]]`): liste des couples 
+
 ## Développement
 
 Créer un environnement virtuel python:

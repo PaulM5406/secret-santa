@@ -9,7 +9,11 @@ from secret_santa import (
     AlgorithmNotFoundError, 
     NotEnoughPeopleError, 
     Algorithm,
-    ALGORITHM_MAP
+    ALGORITHM_MAP,
+    read_json,
+    read_data,
+    ExtensionNotSupportedError,
+    EXTENSION_MAP
 )
 
 
@@ -63,3 +67,15 @@ def test_not_enough_people():
     ]:
         with pytest.raises(NotEnoughPeopleError):
             solve(people, [], Algorithm.BRUTE_FORCE)
+
+def test_read_json():
+    """Test reading data from json file."""
+    people, couples = read_json('data-test.json')
+    couples = [tuple(couple) for couple in couples]
+    assert people == PEOPLE
+    assert couples == COUPLES
+
+def test_extension_not_supported():
+    """Extension not supported should raise ExtensionNotSupportedError"""
+    with pytest.raises(ExtensionNotSupportedError):
+        read_data('data.special')
