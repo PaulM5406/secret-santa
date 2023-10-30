@@ -2,29 +2,15 @@ from typing import Sequence, List
 
 import pytest
 
-def check_solution(people:Sequence[str], couples: Sequence[Sequence[str]], solution: List[str]) -> bool:
-    """
-    Check if solution is valid.
+from secret_santa import (
+    check_solution,
+    brute_force,
+    solve,
+    AlgorithmNotFoundError, 
+    NotEnoughPeopleError, 
+    Algorithm
+)
 
-    1. Check that every member appears only once in solution
-    2. Check that two members of a couple are not consecutive in solution
-    """
-    check_people = {member: 0 for member in people}
-    check_couple = [set(couple) for couple in couples]
-    _solution = solution.copy()
-    _solution.append(solution[0])
-    for i, member in enumerate(solution):
-        if not member in check_people:
-            return False
-        check_people[member] += 1
-        if check_people[member] > 1:
-            return False
-        if set([member, _solution[i+1]]) in check_couple:
-            return False
-    for count in check_people.values():
-        if count != 1:
-            return False
-    return True
 
 PEOPLE = ["Florent", "Jessica", "Coline", "Emilien", "Ambroise", "Bastien"]
 COUPLES = [("Florent", "Jessica"), ("Coline", "Emilien")]
@@ -38,8 +24,29 @@ TESTDATA = [
     (["Ambroise", "Coline", "Jessica", "Emilien", "Florent", "Bastien"], True),
 ]
 
+
 @pytest.mark.parametrize("solution,expected", TESTDATA)
 def test_check_solution(solution: List[str], expected: bool):
+    """Validate check_solution method to determine if a solution is valid"""
     assert check_solution(PEOPLE, COUPLES, solution) is expected
-    
-    
+
+
+def test_brute_force():
+    """
+    Test that brute force algorithm works.
+    """
+    solution = brute_force(PEOPLE, COUPLES)
+    assert solution == ['Florent', 'Coline', 'Jessica', 'Emilien', 'Ambroise', 'Bastien']
+
+def test_wrong_algo():
+    """Wrong algo should raise AlgorithmNotFoundError"""
+    with pytest.raises(AlgorithmNotFoundError):
+        solve([], [], 345)
+
+
+def test_no_people():
+    """People count inferior to 2 should raise NotEnoughPeopleError"""
+    with pytest.raises(NotEnoughPeopleError):
+        solve([], [], Algorithm.BRUTE_FORCE)
+    with pytest.raises(NotEnoughPeopleError):
+        solve(["Florent"], [], Algorithm.BRUTE_FORCE)
