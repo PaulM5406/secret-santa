@@ -19,15 +19,15 @@ Le but de l'exercice est d'écrire un "logiciel", qui calcule et retourne une r�
 
 ## Première solution: brute force search
 
-Sélectionner au hasard un premier membre du groupe pour générer les différentes suites de membres possibles. Une suite de membres est valide si deux membres en couple ne sont pas consécutifs. Le premier et le dernier membre de la suite ne doivent pas être en couple non plus.
+Sélectionner au hasard un premier membre du groupe pour générer les différentes suites de membres possibles. Une suite de membres est valide si chaque membre du groupe apparaît une seule fois et si deux membres en couple ne sont pas consécutifs. Le premier et le dernier membre de la suite ne doivent pas être en couple non plus.
 
-Par example, la représentation ["Florent", "Jessica", "Coline", "Ambroise", "Emilien", "Bastien"] indique que Florent offre un cadeau à Jessica, qui offre un cadeau à Coline, et ainsi de suite jusqu'à Bastien qui offre un cadeau à Florent. Cette solution n'est pas valide puisque Florent et Jessica sont en couple.
+Par example, la représentation de la suite de membre par la liste python ["Florent", "Jessica", "Coline", "Ambroise", "Emilien", "Bastien"] indique que Florent offre un cadeau à Jessica, qui offre un cadeau à Coline, et ainsi de suite jusqu'à Bastien qui offre un cadeau à Florent. Cette solution n'est pas valide puisque Florent et Jessica sont en couple.
 
 Une solution valide est ["Florent", "Coline", "Jesssica", "Ambroise", "Emilien", "Bastien"].
 
 Complexité:
 - temporelle: `O(!n)`
-- mémoire: `O(!n)` 
+- mémoire: `O(n)` 
 
 ## Reformulation
 

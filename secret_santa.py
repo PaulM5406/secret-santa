@@ -1,5 +1,7 @@
+import argparse
 from enum import Enum
 import itertools
+import time
 from typing import Sequence, List
 
 
@@ -80,9 +82,20 @@ def main() -> None:
 
     If no solution is found, an empty list is printed.
     """
+    parser = argparse.ArgumentParser(
+        prog='secret-santa',
+        description='Find a solution if at least one exists to the secret santa problem'
+        )
+    parser.add_argument('--runtime', action='store_true', help='Print runtime')
+    args = parser.parse_args()
+
     PEOPLE = ["Florent", "Jessica", "Coline", "Emilien", "Ambroise", "Bastien"]
     COUPLES = [("Florent", "Jessica"), ("Coline", "Emilien")]
+    start = time.time()
     print(solve(PEOPLE, COUPLES, Algorithm.BRUTE_FORCE))
+    end = time.time()
+    if args.runtime:
+        print(f'Runtime: {(end - start) * 1e3:.3f}ms')
 
 if __name__ == "__main__":
     main()
