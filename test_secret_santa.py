@@ -8,7 +8,8 @@ from secret_santa import (
     solve,
     AlgorithmNotFoundError, 
     NotEnoughPeopleError, 
-    Algorithm
+    Algorithm,
+    ALGORITHM_MAP
 )
 
 
@@ -38,15 +39,27 @@ def test_brute_force():
     solution = brute_force(PEOPLE, COUPLES)
     assert solution == ['Florent', 'Coline', 'Jessica', 'Emilien', 'Ambroise', 'Bastien']
 
+
+def test_algorithm_no_solution():
+    """
+    Empty list is returned if no solution is found.
+    """
+    people = ["Florent", "Jessica", "Bastien"]
+    couples = [("Florent", "Jessica")]
+    for algorithm in ALGORITHM_MAP.values():
+        solution = algorithm(people, couples)
+        assert solution == []
+
 def test_wrong_algo():
     """Wrong algo should raise AlgorithmNotFoundError"""
     with pytest.raises(AlgorithmNotFoundError):
         solve([], [], 345)
 
 
-def test_no_people():
-    """People count inferior to 2 should raise NotEnoughPeopleError"""
-    with pytest.raises(NotEnoughPeopleError):
-        solve([], [], Algorithm.BRUTE_FORCE)
-    with pytest.raises(NotEnoughPeopleError):
-        solve(["Florent"], [], Algorithm.BRUTE_FORCE)
+def test_not_enough_people():
+    """People count inferior to 3 should raise NotEnoughPeopleError"""
+    for people in [
+        [], ["Florent"], ["Florent", "Ambroise"]
+    ]:
+        with pytest.raises(NotEnoughPeopleError):
+            solve(people, [], Algorithm.BRUTE_FORCE)

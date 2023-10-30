@@ -68,7 +68,7 @@ Installer les dépendances de dévéloppement et de test:
 pip install -r requirements-dev.txt
 ```
 
-Lancer la suite de tests
+Lancer la suite de tests:
 
 ```bash
 pytest

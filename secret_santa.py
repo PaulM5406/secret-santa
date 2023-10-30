@@ -59,10 +59,31 @@ def solve(people: Sequence[str], couples: Sequence[Sequence[str]], algo: Algorit
     """
     Check parameters and solve problem with given algorithm. 
     """
-    if algo not in Algorithm:
+    if algo not in ALGORITHM_MAP:
         raise AlgorithmNotFoundError
 
-    if len(people) < 2:
+    if len(people) < 3:
         raise NotEnoughPeopleError
 
-    return ALGORITHM_MAP[algo](people, couple)
+    return ALGORITHM_MAP[algo](people, couples)
+
+
+def main() -> None:
+    """
+    Print solution to the secret santa problem defined in README.
+
+    A solution is a list of members and needs to be read like this:
+        - the first member of the list offers a gift to the second member of the list
+        - the second member offers a gift to the third member of the list
+        - ...
+        - the last member of the list offers a gift to the first member of the list
+
+    If no solution is found, an empty list is printed.
+    """
+    PEOPLE = ["Florent", "Jessica", "Coline", "Emilien", "Ambroise", "Bastien"]
+    COUPLES = [("Florent", "Jessica"), ("Coline", "Emilien")]
+    print(solve(PEOPLE, COUPLES, Algorithm.BRUTE_FORCE))
+
+if __name__ == "__main__":
+    main()
+
