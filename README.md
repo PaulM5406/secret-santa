@@ -10,12 +10,24 @@ On est proche de Noël, nous sommes un groupe d'amis, dont certains sont en coup
 2. Il ne peut pas y avoir de réciprocité dans la répartition : si A offre à B, alors B ne peut pas offrir à A.
 3. Il ne peut pas y avoir de cadeaux entre membres d'un couple : si A et B sont en couples, alors A n'offre pas à B et B n'offre pas à A.
 
-Un jeux de données de test pour les membres et pour les couples :
+Un jeux de données d'example, de test pour les membres et pour les couples :
 
     PEOPLE = ["Florent", "Jessica", "Coline", "Emilien", "Ambroise", "Bastien"]
     COUPLES = [("Florent", "Jessica"), ("Coline", "Emilien")]
 
 Le but de l'exercice est d'écrire un "logiciel", qui calcule et retourne une répartition possible des cadeaux.
+
+## Première solution: brute force search
+
+Sélectionner au hasard un premier membre du groupe pour générer les différentes suites de membres possibles. Une suite de membres est valide si deux membres en couple ne sont pas consécutifs. Le premier et le dernier membre de la suite ne doivent pas être en couple non plus.
+
+Par example, la représentation ["Florent", "Jessica", "Coline", "Ambroise", "Emilien", "Bastien"] indique que Florent offre un cadeau à Jessica, qui offre un cadeau à Coline, et ainsi de suite jusqu'à Bastien qui offre un cadeau à Florent. Cette solution n'est pas valide puisque Florent et Jessica sont en couple.
+
+Une solution valide est ["Florent", "Coline", "Jesssica", "Ambroise", "Emilien", "Bastien"].
+
+Complexité:
+- temporelle: `O(!n)`
+- mémoire: `O(!n)` 
 
 ## Reformulation
 
@@ -36,6 +48,30 @@ Avec cette représentation, le problème peut être reformuler comme suit:
 ```bash
 python secret-santa.py
 ```
+## Développement
 
+Créer un environnement virtuel python:
+
+```bash
+python -m venv env
+```
+
+Activé l'environnement:
+
+```bash
+source env/scripts/activate
+```
+
+Installer les dépendances de dévéloppement et de test:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+Lancer la suite de tests
+
+```bash
+pytest
+```
 
 ## Améliorations
