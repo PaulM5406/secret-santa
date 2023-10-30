@@ -47,7 +47,7 @@ Avec cette représentation, le problème peut être reformuler comme suit:
 
 Nécessaire au lancement du programme: `python >= 3.4` 
 
-Pour lancer *secret-santa*:
+Pour lancer *secret-santa* en utilisant l'algorithme par défaut `BRUTE FORCE SEARCH`:
 
 ```bash
 python secret-santa.py data-test.json
@@ -59,11 +59,20 @@ Accéder aux différentes options:
 python secret-santa.py --help
 ```
 
-## Sources de données supportées
+### Sources de données supportées
 
 - Fichier au format `json` contenant un dictionnaire avec pour clés :
     - `"people"` (`List[str]`): liste des membres du groupes
     - `"couples"` (`List[List[str]]`): liste des couples 
+
+
+### Algorithmes supportés
+
+- `BRUTE FORCE SEARCH`: 
+
+```bash
+python secret-santa.py --algo 0
+```
 
 ## Développement
 

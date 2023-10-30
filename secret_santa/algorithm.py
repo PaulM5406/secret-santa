@@ -52,7 +52,7 @@ class AlgorithmNotFoundError(Exception):
 
 
 class Algorithm(Enum):
-    BRUTE_FORCE = 1
+    BRUTE_FORCE = 0
 
 
 ALGORITHM_MAP = {

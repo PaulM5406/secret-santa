@@ -20,14 +20,30 @@ def main() -> None:
         prog='secret-santa',
         description='Find a solution if at least one exists to the secret santa problem'
         )
-    parser.add_argument('--runtime', action='store_true', help='Print runtime')
-    parser.add_argument('pathname', type=str, help='Pathname of file that contains problem data. See supported formats in README.md')
+    parser.add_argument(
+        'pathname', 
+        type=str, 
+        help='Pathname of file that contains problem data. See supported formats in README.md'
+        )
+    parser.add_argument(
+        '--runtime', 
+        action='store_true', 
+        help='Print runtime'
+        )
+    parser.add_argument(
+        '--algo', 
+        type=int,
+        default=0,
+        choices=[algo.value for algo in algorithm.Algorithm], 
+        help="Algorithm to use. Default is 0 (Brute Force Search). See supported formats in README.md"
+        )
     args = parser.parse_args()
 
     people, couples = reader.read_data(args.pathname)
+    algo = algorithm.Algorithm._value2member_map_[args.algo]
 
     start = time.time()
-    print(algorithm.solve(people, couples, algorithm.Algorithm.BRUTE_FORCE))
+    print(algorithm.solve(people, couples, algo))
     end = time.time()
     if args.runtime:
         print(f'Runtime: {(end - start) * 1e3:.3f}ms')
