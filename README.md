@@ -40,12 +40,27 @@ Par exemple, en utilisant le jeux de données d'example (chaque membre est dési
 
 ![image](graph-example.png)
 
+On obtient un graphe non dirigé, sans poids (*"undirected unweighted graph"*).
+
 Avec cette représentation, le problème peut être reformuler comme suit:
 > Trouver le chemin reliant chaque sommet exactement une fois et revenant au sommet de départ.
 
+Ce problème correspond au problème du cycle ou circuit Hamiltonian ([Hamiltonian cycle problem](https://en.wikipedia.org/wiki/Hamiltonian_path_problem)). C'est un problème faisant partie de la classe des problèmes appélés *NP-complete*.
+
+Cette classe de problème est par définition difficile à résoudre.
+
+Quelques algorithmes et méthodes utilisés pour résoudre ce problème sont:
+
+- Brute Force (`O(!n)`)
+- Backtraking (`O(!n)`)
+- Algorithme de Held-Karp (`O(n^2*2^n)`)
+
+Se référer à la page Wikipédia citée au-dessus pour plus de détails.
+
+
 ## Comment lancer *secret-santa*
 
-Nécessaire au lancement du programme: `python >= 3.4` 
+Nécessaire au lancement du programme: `Python 3.7+` 
 
 Pour lancer *secret-santa* en utilisant l'algorithme par défaut `BRUTE FORCE SEARCH`:
 
@@ -84,8 +99,14 @@ python -m venv env
 
 Activé l'environnement:
 
+- Sous *Linux* ou *MacOS*:
 ```bash
-source env/scripts/activate
+source env/bin/activate
+```
+
+- Sous *Windows*:
+```bash
+env/Scripts/activate.bat
 ```
 
 Installer les dépendances de dévéloppement et de test:
@@ -108,4 +129,25 @@ python generate-data.py
 ```
 
 
-## Améliorations
+## Pistes d'améliorations
+
+- Valider davantage les données d'entrées
+
+- Améliorer les messages d'erreur
+
+- Ajouter d'autres sources de données supportées
+
+- Proposer différents formats de sorties
+
+- Implémentation alternative: Restructurer le code de manière à ce qu'il soit davatange orienté objet
+
+- Implémenter des algorithmes plus performants: 
+
+     - Randomiser les solutions dans l'approche brute force
+     - Backtracking algorithme
+     - Voir article [Wikipédia](https://en.wikipedia.org/wiki/Hamiltonian_path_problem)
+
+- Utiliser des méthodes non convientionnelles:
+
+    - DNA computing
+    - Quantum computing (Résolution du [Traveling Salesperson problem](https://docs.ocean.dwavesys.com/en/latest/docs_dnx/reference/algorithms/tsp.html) avec la technologie annealing développée par D-Wave)
