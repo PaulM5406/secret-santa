@@ -107,8 +107,8 @@ source env/bin/activate
 ```
 
 - Sous *Windows*:
-```bash
-env/Scripts/activate.bat
+```ms-dos
+.\env\Scripts\activate.bat
 ```
 
 Installer les dépendances de dévéloppement et de test:
