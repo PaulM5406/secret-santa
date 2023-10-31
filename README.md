@@ -51,7 +51,7 @@ Cette classe de problème est par définition difficile à résoudre.
 Quelques algorithmes et méthodes utilisés pour résoudre ce problème sont:
 
 - Brute Force (`O(!n)`)
-- Backtraking (`O(!n)`)
+- Backtracking (`O(!n)`)
 - Algorithme de Held-Karp (`O(n^2*2^n)`)
 
 Se référer à la page Wikipédia citée au-dessus pour plus de détails.
