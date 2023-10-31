@@ -65,7 +65,7 @@ Nécessaire au lancement du programme: `Python 3.7+`
 Pour lancer *secret-santa* en utilisant l'algorithme par défaut `BRUTE FORCE SEARCH`:
 
 ```bash
-python secret-santa.py data-test.json
+python secret-santa.py data/data-test.json
 ```
 
 Accéder aux différentes options:
@@ -83,10 +83,13 @@ python secret-santa.py --help
 
 ### Algorithmes supportés
 
-- `BRUTE FORCE SEARCH`: 
+- `BRUTE FORCE SEARCH` (`0`)
+- `BACKTRACKING`  (`1`)
+
+Par exemple, pour utiliser l'algorithme de `backtracking`:
 
 ```bash
-python secret-santa.py --algo 0
+python secret-santa.py data/data-test.json --algo 1
 ```
 
 ## Développement
@@ -144,7 +147,6 @@ python generate-data.py
 - Implémenter des algorithmes plus performants: 
 
      - Randomiser les solutions dans l'approche brute force
-     - Backtracking algorithme
      - Voir article [Wikipédia](https://en.wikipedia.org/wiki/Hamiltonian_path_problem)
 
 - Utiliser des méthodes non convientionnelles:

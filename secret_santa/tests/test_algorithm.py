@@ -5,6 +5,7 @@ import pytest
 from ..algorithm import (
     check_solution,
     brute_force,
+    backtracking,
     solve,
     AlgorithmNotFoundError, 
     NotEnoughPeopleError, 
@@ -37,6 +38,14 @@ def test_brute_force():
     Test that brute force algorithm works.
     """
     solution = brute_force(PEOPLE, COUPLES)
+    assert solution == ['Florent', 'Coline', 'Jessica', 'Emilien', 'Ambroise', 'Bastien']
+
+
+def test_backtracking():
+    """
+    Test that backtracking algorithm works.
+    """
+    solution = backtracking(PEOPLE, COUPLES)
     assert solution == ['Florent', 'Coline', 'Jessica', 'Emilien', 'Ambroise', 'Bastien']
 
 

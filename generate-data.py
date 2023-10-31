@@ -41,5 +41,5 @@ data = {
 }
 
 # Create data file
-with open(f'data-people{n_people}-couples{n_couple}.json', 'w') as f:
+with open(f'data/data-people{n_people}-couples{n_couple}.json', 'w') as f:
     json.dump(data, f)
