@@ -10,7 +10,7 @@ On est proche de Noël, nous sommes un groupe d'amis, dont certains sont en coup
 2. Il ne peut pas y avoir de réciprocité dans la répartition : si A offre à B, alors B ne peut pas offrir à A.
 3. Il ne peut pas y avoir de cadeaux entre membres d'un couple : si A et B sont en couples, alors A n'offre pas à B et B n'offre pas à A.
 
-Un jeux de données d'example, de test pour les membres et pour les couples :
+Un jeux de données d'exemple, de test pour les membres et pour les couples :
 
     PEOPLE = ["Florent", "Jessica", "Coline", "Emilien", "Ambroise", "Bastien"]
     COUPLES = [("Florent", "Jessica"), ("Coline", "Emilien")]
@@ -19,10 +19,9 @@ Le but de l'exercice est d'écrire un "logiciel", qui calcule et retourne une r�
 
 ## Première solution: brute force search
 
-Sélectionner au hasard un premier membre du groupe pour générer les différentes suites de membres possibles. Une suite de membres est valide si chaque membre du groupe apparaît une seule fois et si deux membres en couple ne sont pas consécutifs. Le premier et le dernier membre de la suite ne doivent pas être en couple non plus.
+Générer les différentes suites de membres possibles. Une suite de membres est valide si chaque membre du groupe apparaît une seule fois et si deux membres en couple ne sont pas adjacents dans la suite. Le premier et le dernier membre de la suite ne doivent pas être en couple non plus.
 
-Par example, la représentation de la suite de membre par la liste python ["Florent", "Jessica", "Coline", "Ambroise", "Emilien", "Bastien"] indique que Florent offre un cadeau à Jessica, qui offre un cadeau à Coline, et ainsi de suite jusqu'à Bastien qui offre un cadeau à Florent. Cette solution n'est pas valide puisque Florent et Jessica sont en couple.
-
+Par exemple, la représentation de la suite de membres par la liste python ["Florent", "Jessica", "Coline", "Ambroise", "Emilien", "Bastien"] indique que Florent offre un cadeau à Jessica, qui offre un cadeau à Coline, et ainsi de suite jusqu'à Bastien qui offre un cadeau à Florent. Cette solution n'est pas valide puisque Florent et Jessica sont en couple.
 Une solution valide est ["Florent", "Coline", "Jesssica", "Ambroise", "Emilien", "Bastien"].
 
 Complexité:
@@ -36,7 +35,7 @@ Pour mieux visualiser le problème et les possibles cadeaux des uns envers les a
 - chaque sommet représente un membre du groupe
 - chaque arête représente un possibilité de cadeau d'un membre à un autre
 
-Par exemple, en utilisant le jeux de données d'example (chaque membre est désigné par l'intial de son prénom):
+Par exemple, en utilisant le jeux de données d'exemple (chaque membre est désigné par l'intial de son prénom):
 
 ![image](graph-example.png)
 
